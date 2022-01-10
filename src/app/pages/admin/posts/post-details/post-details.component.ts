@@ -15,27 +15,13 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
   ) {}
 
-  paramsId: any = 0
+  params: any
 
-  post$ = combineLatest([this.postsService.post$, this.route.params]).pipe(
-    map(([post, paramsId]) => {
-      const params = paramsId['id']
-      console.log(post, params)
+  postDetails$ = this.postsService.post$
 
-      if (this.paramsId === 0) {
-        this.paramsId = params
-        this.postsService.loadPostsDetails(params)
-      }
-
-      return post
-    }),
-  )
-
-  a: any = null
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.postsService.loadPostsDetails(0)
+  ngOnInit(): void {
+    this.postsService.loadPostsDetails(this.route.snapshot.params['id'])
   }
+
+  ngOnDestroy(): void {}
 }

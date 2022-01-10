@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, combineLatest } from 'rxjs'
+import { map, switchMap } from 'rxjs/operators'
 
 interface IPost {
   userId: number
@@ -15,15 +16,32 @@ interface IPost {
 export class PostsService {
   posts$ = new BehaviorSubject<IPost[]>([])
 
-  post$ = new BehaviorSubject<IPost>({
-    userId: 0,
-    id: 0,
-    title: '',
-    body: '',
-  })
+  post$ = new BehaviorSubject<{
+    user: any
+    userId: number
+    id: number
+    title: string
+    body: string
+  } | null>(null)
+
+  user$ = new BehaviorSubject<any>({})
+
+  postDetails$ = combineLatest([this.post$, this.user$]).pipe(
+    map(([post, user]) => {
+      var details = { ...user, ...post }
+
+      return details
+    }),
+  )
 
   private endpoint = 'https://jsonplaceholder.typicode.com/posts'
   constructor(private http: HttpClient) {}
+
+  getUser(userId: any) {
+    return this.http.get<any>(
+      `https://jsonplaceholder.typicode.com/users/${userId}`,
+    )
+  }
 
   loadPosts() {
     // Add a request to get posts using `endpoint`
@@ -35,15 +53,22 @@ export class PostsService {
     })
   }
 
-  loadPostsDetails(postId: any) {
-    console.log(postId)
-    if (postId === 0) {
-      return this.post$.next({ userId: 0, id: 0, title: '', body: '' })
-    }
+  loadPostsDetails(postId: number) {
+    this.post$.next(null)
+    this.http
+      .get<IPost>(`${this.endpoint}/${postId}`)
+      .pipe(
+        switchMap((post) => {
+          return this.getUser(post.userId).pipe(
+            map((user) => {
+              return { ...post, user }
+            }),
+          )
+        }),
+      )
 
-    this.http.get<IPost>(`${this.endpoint}/${postId}`).subscribe((post) => {
-      console.log(post)
-      this.post$.next(post)
-    })
+      .subscribe((post) => {
+        this.post$.next(post)
+      })
   }
 }

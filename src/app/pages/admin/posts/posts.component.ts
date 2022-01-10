@@ -13,6 +13,5 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postsService.loadPosts()
-    console.log(this.posts$)
   }
 }

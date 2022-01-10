@@ -1,41 +1,26 @@
-<p>post-details works!</p>
-
-<mat-nav-list >
-    <mat-list-item *ngIf="post$ |async as post">
-   
-     <span *ngIf="post.id !==0">
-        <span>{{post.id}}</span>
-        <span>{{post.userId}}</span>
-        <span>{{post.body}}</span>
-        <span>{{post.title}}</span>
-     </span>
 
 
+  <mat-card  *ngIf="postDetails$ |async as post">
 
-   
-    </mat-list-item>
-  </mat-nav-list>
-
-  <mat-card>Simple card</mat-card>
+<div *ngIf="post  ; else loading" >
+  <mat-card-title>{{post.title}}</mat-card-title>
+  <mat-card-subtitle>Post id: {{post.id}}</mat-card-subtitle>
 
 
-  <!-- <span>{{post$[0].id |async}}</span> -->
+<mat-card-content>
+    {{post.body}}
+</mat-card-content>
 
-  <!-- <div *ngIf="post$ | async as posts">
-    <h2>Post details</h2>
-    <p>User id: {{ posts.userId }}</p>
-    <p>Post id: {{ posts.id }}</p>
-    <p>{{ posts.title }}</p>
-    <p>{{ posts.body }}</p>
-    <button (click)="postDelete(posts.id)">delete</button>
-    <button (click)="postUpdate(posts.id)">update</button>
-  </div> -->
-  
+<mat-card-content>
+    {{post.user.name}} , userId: {{post.userId}}
+</mat-card-content>
+<mat-card-content>
+   email:  {{post.user.email}}
+</mat-card-content>
+</div>
+  </mat-card>
 
-  
-  <!-- <mat-nav-list >
-    <mat-list-item *ngFor="let post of post$ | async">
-        <span>{{post.id}}</span>
-        <a mat-list-item  [routerLink]="['posts-details',post.id]" >{{post.title}}</a>
-    </mat-list-item>
-  </mat-nav-list> -->
+
+  <ng-template #loading>Loading ...</ng-template>
+
+
