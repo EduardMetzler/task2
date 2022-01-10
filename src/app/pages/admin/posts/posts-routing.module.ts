@@ -8,6 +8,14 @@ const routes: Routes = [
     path: '',
     component: PostsComponent,
   },
+  {
+    path: 'posts-details',
+
+    loadChildren: () =>
+      import('./post-details/posts-details.module').then(
+        (m) => m.PostsDetailsModule,
+      ),
+  },
 ]
 
 @NgModule({

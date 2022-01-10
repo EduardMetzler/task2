@@ -1,0 +1,41 @@
+<p>post-details works!</p>
+
+<mat-nav-list >
+    <mat-list-item *ngIf="post$ |async as post">
+   
+     <span *ngIf="post.id !==0">
+        <span>{{post.id}}</span>
+        <span>{{post.userId}}</span>
+        <span>{{post.body}}</span>
+        <span>{{post.title}}</span>
+     </span>
+
+
+
+   
+    </mat-list-item>
+  </mat-nav-list>
+
+  <mat-card>Simple card</mat-card>
+
+
+  <!-- <span>{{post$[0].id |async}}</span> -->
+
+  <!-- <div *ngIf="post$ | async as posts">
+    <h2>Post details</h2>
+    <p>User id: {{ posts.userId }}</p>
+    <p>Post id: {{ posts.id }}</p>
+    <p>{{ posts.title }}</p>
+    <p>{{ posts.body }}</p>
+    <button (click)="postDelete(posts.id)">delete</button>
+    <button (click)="postUpdate(posts.id)">update</button>
+  </div> -->
+  
+
+  
+  <!-- <mat-nav-list >
+    <mat-list-item *ngFor="let post of post$ | async">
+        <span>{{post.id}}</span>
+        <a mat-list-item  [routerLink]="['posts-details',post.id]" >{{post.title}}</a>
+    </mat-list-item>
+  </mat-nav-list> -->

@@ -1,1 +1,7 @@
-<p>posts works!</p>
+
+  <mat-nav-list >
+    <mat-list-item *ngFor="let post of posts$ | async">
+        <span>{{post.id}}</span>
+        <a mat-list-item  [routerLink]="['posts-details',post.id]" >{{post.title}}</a>
+    </mat-list-item>
+  </mat-nav-list>
