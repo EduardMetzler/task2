@@ -1,0 +1,27 @@
+<mat-card *ngIf="user$ | async as user">
+  <div *ngIf="user; else loading">
+    <mat-card-title>User</mat-card-title>
+
+    <mat-card-subtitle>Name: {{ user.name }}</mat-card-subtitle>
+    <mat-card-title>Adresse</mat-card-title>
+
+    <mat-card-subtitle>City: {{ user.address.city }}</mat-card-subtitle>
+    <mat-card-subtitle>Street: {{ user.address.street }}</mat-card-subtitle>
+    <mat-card-subtitle>Suite: {{ user.address.suite }}</mat-card-subtitle>
+    <mat-card-subtitle>Zipcode: {{ user.address.zipcode }}</mat-card-subtitle>
+    <mat-card-title>Company</mat-card-title>
+
+    <mat-card-subtitle>Name: {{ user.company.name }}</mat-card-subtitle>
+    <mat-card-subtitle>
+      CatchPhrase: {{ user.company.catchPhrase }}
+    </mat-card-subtitle>
+    <mat-card-subtitle>Bs: {{ user.company.bs }}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="posts$ | async as post">
+      <mat-card-title>Posts</mat-card-title>
+
+      Created Posts: {{ post.length }}
+    </mat-card-subtitle>
+  </div>
+</mat-card>
+
+<ng-template #loading>Loading ...</ng-template>

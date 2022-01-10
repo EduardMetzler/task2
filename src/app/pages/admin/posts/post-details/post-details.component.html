@@ -12,7 +12,7 @@
 </mat-card-content>
 
 <mat-card-content>
-    {{post.user.name}} , userId: {{post.userId}}
+   <a  [routerLink]="['/admin/users/user-details',post.id]">{{post.user.name}}</a> , userId: {{post.userId}}
 </mat-card-content>
 <mat-card-content>
    email:  {{post.user.email}}

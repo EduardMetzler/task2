@@ -1,1 +1,11 @@
-<p>users works!</p>
+
+
+  <mat-nav-list >
+      <mat-list-item><div class="mat-subheadling-1">Users List</div></mat-list-item>
+      
+   
+    <mat-list-item *ngFor="let user of users$ | async">
+    
+        <a mat-list-item  [routerLink]="['user-details',user.id]" >  {{user.name}}</a>
+    </mat-list-item>
+  </mat-nav-list>
