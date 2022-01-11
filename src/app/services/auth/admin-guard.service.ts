@@ -20,8 +20,9 @@ export class AdminGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.auth.isLoggedIn) {
       this.router.navigate(['login'])
+      return false
     }
 
-    return this.auth.isLoggedIn
+    return true
   }
 }

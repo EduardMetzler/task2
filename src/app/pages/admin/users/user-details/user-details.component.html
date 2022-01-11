@@ -16,10 +16,10 @@
       CatchPhrase: {{ user.company.catchPhrase }}
     </mat-card-subtitle>
     <mat-card-subtitle>Bs: {{ user.company.bs }}</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="posts$ | async as post">
+    <mat-card-subtitle *ngIf="posts$ | async as posts">
       <mat-card-title>Posts</mat-card-title>
 
-      Created Posts: {{ post.length }}
+      Created Posts: {{ posts.length }}
     </mat-card-subtitle>
   </div>
 </mat-card>
