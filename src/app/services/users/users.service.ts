@@ -19,7 +19,7 @@ export class UsersService {
     })
   }
 
-  loadUserDetails(userId: any) {
+  loadUserDetails(userId: number) {
     this.user$.next(null)
     this.http.get<any>(`${this.endpoint}/${userId}`).subscribe((user) => {
       this.user$.next(user)

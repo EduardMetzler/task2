@@ -13,7 +13,6 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private postsService: PostsService,
-
     private route: ActivatedRoute,
   ) {}
 
