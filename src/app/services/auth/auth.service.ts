@@ -18,6 +18,11 @@ export class AuthService {
   constructor(private router: Router) {}
 
   get permissions() {
+    if (localStorage.getItem('loggedIn') === 'true') {
+      this.userPermissions.next(permissions)
+    }
+
+    console.log(this.userPermissions.asObservable())
     return this.userPermissions.asObservable()
   }
 
@@ -29,6 +34,7 @@ export class AuthService {
     this.fakeLogin().subscribe((res) => {
       this.userPermissions.next(res.permissions)
       this.router.navigate(['admin'])
+      localStorage.setItem('loggedIn', 'true')
       this.loggedIn = true
     })
   }
