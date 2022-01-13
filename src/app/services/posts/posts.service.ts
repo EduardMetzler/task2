@@ -15,6 +15,7 @@ interface IPost {
 })
 export class PostsService {
   posts$ = new BehaviorSubject<IPost[]>([])
+  postsOfUser$ = new BehaviorSubject<IPost[]>([])
 
   post$ = new BehaviorSubject<{
     user: any
@@ -69,6 +70,15 @@ export class PostsService {
 
       .subscribe((post) => {
         this.post$.next(post)
+      })
+  }
+
+  getPostsOfUser(userId: any) {
+    this.http
+      .get<any>(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+      .subscribe((postsOfUser) => {
+        console.log(postsOfUser)
+        this.postsOfUser$.next(postsOfUser)
       })
   }
 }

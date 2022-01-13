@@ -15,19 +15,24 @@ export class UserDetailsComponent implements OnInit {
     private postsService: PostsService,
     private route: ActivatedRoute,
   ) {}
+  panelOpenState = false
 
   user$ = this.usersService.user$
 
-  posts$ = this.postsService.posts$.pipe(
-    map((posts) => {
-      return posts.filter((post) => {
-        return post.userId == this.route.snapshot.params['id']
-      })
-    }),
-  )
+  // posts$ = this.postsService.posts$.pipe(
+  //   map((posts) => {
+  //     console.log(posts)
+  //     return posts.filter((post) => {
+  //       return post.userId == this.route.snapshot.params['id']
+  //     })
+  //   }),
+  // )
+
+  postsOfUser$ = this.postsService.postsOfUser$
 
   ngOnInit(): void {
     this.usersService.loadUserDetails(this.route.snapshot.params['id'])
     this.postsService.loadPosts()
+    this.postsService.getPostsOfUser(this.route.snapshot.params['id'])
   }
 }

@@ -16,12 +16,31 @@
       CatchPhrase: {{ user.company.catchPhrase }}
     </mat-card-subtitle>
     <mat-card-subtitle>Bs: {{ user.company.bs }}</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="posts$ | async as posts">
+    <mat-card-subtitle>
       <mat-card-title>Posts</mat-card-title>
-
-      Created Posts: {{ posts.length }}
     </mat-card-subtitle>
   </div>
 </mat-card>
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header *ngIf="postsOfUser$ | async as postsOfUser">
+      <mat-panel-title>Created Posts: {{ postsOfUser.length }}</mat-panel-title>
+      <mat-panel-description>
+        Click too {{ panelOpenState ? 'closen' : 'open' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let post of postsOfUser$ | async">
+        <span>{{ post.id }}</span>
+        <a mat-list-item [routerLink]="['/admin/posts/posts-details', post.id]">
+          {{ post.title }}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <ng-template #loading>Loading ...</ng-template>

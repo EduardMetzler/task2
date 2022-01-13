@@ -3,8 +3,16 @@ import { CommonModule } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button'
 import { MatListModule } from '@angular/material/list'
 import { MatCardModule } from '@angular/material/card'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatExpansionModule } from '@angular/material/expansion'
 
-const MaterialComponents = [MatButtonModule, MatListModule, MatCardModule]
+const MaterialComponents = [
+  MatButtonModule,
+  MatListModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatExpansionModule,
+]
 
 @NgModule({
   declarations: [],

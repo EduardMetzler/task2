@@ -22,8 +22,10 @@ export class PostsAndUsersGuardService implements CanActivate {
     const requiredPermissions = route.data.requiredPermissions
 
     const permissions = this.auth.permissions.pipe(
-      map((item: any) => {
-        const myPermissions = item.find((i: any) => i === requiredPermissions)
+      map((permissionsListe: any) => {
+        const myPermissions = permissionsListe.find(
+          (i: any) => i === requiredPermissions,
+        )
         console.log(myPermissions)
         return myPermissions !== undefined
       }),
