@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatCardModule } from '@angular/material/card'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatTableModule } from '@angular/material/table'
 
 const MaterialComponents = [
   MatButtonModule,
@@ -12,6 +13,7 @@ const MaterialComponents = [
   MatCardModule,
   MatPaginatorModule,
   MatExpansionModule,
+  MatTableModule,
 ]
 
 @NgModule({

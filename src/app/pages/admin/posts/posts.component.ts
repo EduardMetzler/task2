@@ -49,7 +49,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.postsService.loadPosts()
-    this.posts$.subscribe()
+    // this.posts$.subscribe()
     // this.pageSlice = this.posts.slice(0, 10)
   }
 

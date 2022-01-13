@@ -32,7 +32,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.loadUserDetails(this.route.snapshot.params['id'])
-    this.postsService.loadPosts()
+    // this.postsService.loadPosts()
     this.postsService.getPostsOfUser(this.route.snapshot.params['id'])
   }
 }

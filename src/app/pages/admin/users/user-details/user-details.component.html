@@ -35,7 +35,10 @@
     <mat-nav-list>
       <mat-list-item *ngFor="let post of postsOfUser$ | async">
         <span>{{ post.id }}</span>
-        <a mat-list-item [routerLink]="['/admin/posts/posts-details', post.id]">
+        <a
+          mat-list-item
+          [routerLink]="['/admin/posts/posts-details', post.userId]"
+        >
           {{ post.title }}
         </a>
       </mat-list-item>
