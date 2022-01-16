@@ -1,21 +1,12 @@
-<!-- <mat-nav-list>
-  <mat-list-item *ngFor="let post of posts$ | async">
-    <span>{{ post.id }}</span>
-    <a mat-list-item [routerLink]="['posts-details', post.id]">
-      {{ post.title }}
-    </a>
-  </mat-list-item>
-</mat-nav-list> -->
-
-<!-- <div *ngIf="posts$ | async"> -->
-<mat-paginator
-  [length]="100"
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  (page)="OnPageChange($event)"
-  aria-label="Select page"
-></mat-paginator>
-<!-- </div> -->
+<!-- <div *ngIf="posts$ | async">
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="OnPageChange($event)"
+    aria-label="Select page"
+  ></mat-paginator>
+</div>
 
 <mat-nav-list>
   <mat-list-item *ngFor="let post of posts$ | async">
@@ -25,3 +16,53 @@
     </a>
   </mat-list-item>
 </mat-nav-list>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+<!-- <div *ngIf="posts$ | async"> -->
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+></mat-paginator>
+<!-- </div> -->
+
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
+</mat-form-field>
+
+<div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef>No</th>
+      <td mat-cell *matCellDef="let element" class="hover">
+        {{ element.id }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element" class="hover">
+        {{ element.title }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef>Text</th>
+      <td mat-cell *matCellDef="let element" class="hover">
+        {{ element.body }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [routerLink]="['posts-details', row.id]"
+    ></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+</div>
